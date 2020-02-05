@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: myredis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: myredis
+    spec:
+      containers:
+        - name: myrediscontainer
+          image: redis
+          ports:
+            - containerPort: 6379
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: myredis
+spec:
+  selector:
+    app: myredis
+  # type: ClusterIP
+  ports:
+    - name: myredisport
+      port: 6379
+      targetPort: 6379

@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  flaskapp:
+    image: adamcao/helloflaskredis:2.0
+    build:
+      context: ./flaskwebapp
+    ports:
+      - "5000:5001"
+    depends_on:
+      - myredis
+  myredis:
+    image: redis
+    ports:
+      - "6379:6379"
